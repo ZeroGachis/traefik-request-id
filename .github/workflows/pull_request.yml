@@ -1,9 +1,5 @@
-name: Main
-
+name: Pull Request
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 jobs:
@@ -21,7 +17,6 @@ jobs:
         working-directory: ${{ github.workspace }}/go/src/github.com/${{ github.repository }}
 
     steps:
-
       # https://github.com/marketplace/actions/setup-go-environment
       - name: Set up Go ${{ env.GO_VERSION }}
         uses: actions/setup-go@v2
