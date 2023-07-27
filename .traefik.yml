@@ -1,10 +1,10 @@
-displayName: Demo Plugin
+displayName: SW Correlation ID
 type: middleware
 iconPath: .assets/icon.png
 
-import: github.com/traefik/plugindemo
+import: github.com/ZeroGachis/traefik-correlation-id
 
-summary: '[Demo] Add Request Header'
+summary: 'Traefik plugin to inject a Correlation ID in incoming HTTP requests '
 
 testData:
   Headers:
