@@ -1,12 +1,9 @@
-displayName: SW Correlation ID
+displayName: SW Request ID
 type: middleware
+import: github.com/ZeroGachis/traefik-request-id
+
+summary: 'Traefik plugin to inject a request ID in incoming HTTP requests'
+
 iconPath: .assets/icon.png
 
-import: github.com/ZeroGachis/traefik-correlation-id
-
-summary: 'Traefik plugin to inject a Correlation ID in incoming HTTP requests '
-
 testData:
-  Headers:
-    X-Demo: test
-    X-URL: '{{URL}}'

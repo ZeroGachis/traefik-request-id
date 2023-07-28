@@ -1,4 +1,4 @@
-module github.com/ZeroGachis/traefik-correlation-id
+module github.com/ZeroGachis/traefik-request-id
 
 go 1.19
 
