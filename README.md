@@ -1,4 +1,4 @@
-# ID plugin for Traefik
+# Request ID plugin for Traefik
 
 This traefik plugin set a 'X-Request-Id' header for every incoming HTTP request that
 does not have one already.
