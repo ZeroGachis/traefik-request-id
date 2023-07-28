@@ -3,6 +3,6 @@ services:
     build:
       context: .
     tty: true
-    working_dir: /home/traefik_request_id
+    working_dir: /go/src/github.com/ZeroGachis/traefik-request-id
     volumes:
-      - .:/home/traefik_request_id
+      - .:/go/src/github.com/ZeroGachis/traefik-request-id

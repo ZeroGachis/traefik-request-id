@@ -11,12 +11,12 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 # Install Yaegi (go interpreter used by Traefik)
 RUN curl -sfL https://raw.githubusercontent.com/traefik/yaegi/master/install.sh | bash -s -- -b $(go env GOPATH)/bin ${YAEGI_VERSION}
 
-WORKDIR /home/traefik_request_id
+WORKDIR /go/src/github.com/ZeroGachis/traefik-request-id
 
 COPY ./ ./
 
 RUN \
-    go env -w GOPATH=/home/traefik_request_id/go && \
+    go env -w GOPATH=/go && \
     go mod tidy && \
     go mod download && \
     go mod vendor

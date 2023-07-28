@@ -1,19 +1,21 @@
-package requestid
+package requestid_test
 
 import (
 	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	plugin "github.com/ZeroGachis/traefik-request-id"
 )
 
 func TestAddRequestIdInHeaderIfNoneExist(t *testing.T) {
-	cfg := CreateConfig()
+	cfg := plugin.CreateConfig()
 
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 
-	handler, err := New(ctx, next, cfg, "sw-request-id-plugin")
+	handler, err := plugin.New(ctx, next, cfg, "sw-request-id-plugin")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34,12 +36,12 @@ func TestAddRequestIdInHeaderIfNoneExist(t *testing.T) {
 }
 
 func TestKeepRequestIdInHeaderIfOneExist(t *testing.T) {
-	cfg := CreateConfig()
+	cfg := plugin.CreateConfig()
 
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 
-	handler, err := New(ctx, next, cfg, "sw-request-id-plugin")
+	handler, err := plugin.New(ctx, next, cfg, "sw-request-id-plugin")
 	if err != nil {
 		t.Fatal(err)
 	}
