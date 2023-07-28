@@ -1,4 +1,4 @@
-package correlationid
+package requestid
 
 import (
 	"context"
@@ -7,13 +7,13 @@ import (
 	"testing"
 )
 
-func TestAddCorrelationIdInHeaderIfNoneExist(t *testing.T) {
+func TestAddRequestIdInHeaderIfNoneExist(t *testing.T) {
 	cfg := CreateConfig()
 
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 
-	handler, err := New(ctx, next, cfg, "correlation-id-plugin")
+	handler, err := New(ctx, next, cfg, "sw-request-id-plugin")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27,19 +27,19 @@ func TestAddCorrelationIdInHeaderIfNoneExist(t *testing.T) {
 
 	handler.ServeHTTP(recorder, req)
 
-	cid := req.Header.Get("X-Correlation-ID")
+	cid := req.Header.Get("X-Request-ID")
 	if cid == "" {
-		t.Errorf("FAK")
+		t.Errorf("Request ID has not been generated")
 	}
 }
 
-func TestKeepCorrelationIdInHeaderIfOneExist(t *testing.T) {
+func TestKeepRequestIdInHeaderIfOneExist(t *testing.T) {
 	cfg := CreateConfig()
 
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 
-	handler, err := New(ctx, next, cfg, "correlation-id-plugin")
+	handler, err := New(ctx, next, cfg, "sw-request-id-plugin")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -50,13 +50,13 @@ func TestKeepCorrelationIdInHeaderIfOneExist(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	existingCid := "some-existing-correlation-id"
-	req.Header.Set("X-Correlation-ID", existingCid)
+	existingCid := "some-existing-request-id"
+	req.Header.Set("X-Request-ID", existingCid)
 
 	handler.ServeHTTP(recorder, req)
 
-	cid := req.Header.Get("X-Correlation-ID")
+	cid := req.Header.Get("X-Request-ID")
 	if cid != existingCid {
-		t.Errorf("FAK")
+		t.Errorf("Existing Request ID has not been kept")
 	}
 }

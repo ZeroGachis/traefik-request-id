@@ -3,6 +3,6 @@ services:
     build:
       context: .
     tty: true
-    working_dir: /home/traefik_correlation_id
+    working_dir: /home/traefik_request_id
     volumes:
-      - .:/home/traefik_correlation_id
+      - .:/home/traefik_request_id

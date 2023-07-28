@@ -1,5 +1,5 @@
-// Package correlationid a Traefik plugin to add correlation ID to incoming HTTP requests.
-package correlationid
+// Package requestid a Traefik plugin to add request ID to incoming HTTP requests.
+package requestid
 
 import (
 	"context"
@@ -16,7 +16,7 @@ func CreateConfig() *Config {
 	return &Config{}
 }
 
-// Plugin a correlation id plugin.
+// Plugin a request id plugin.
 type Plugin struct {
 	next http.Handler
 	name string
@@ -31,9 +31,9 @@ func New(_ context.Context, next http.Handler, _ *Config, name string) (http.Han
 }
 
 func (a *Plugin) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	cid := req.Header.Get("X-Correlation-ID")
+	cid := req.Header.Get("X-Request-ID")
 	if cid == "" {
-		req.Header.Set("X-Correlation-ID", uuid.New().String())
+		req.Header.Set("X-Request-ID", uuid.New().String())
 	}
 
 	a.next.ServeHTTP(rw, req)
