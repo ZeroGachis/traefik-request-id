@@ -1,4 +1,4 @@
-FROM golang:1.19-bookworm
+FROM golang:1.24-bookworm
 
 ENV GOLANGCI_LINT_VERSION=v1.53.3
 ENV YAEGI_VERSION=v0.14.2
